@@ -76,12 +76,56 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
 ## STM 32 CUBE PROGRAM :
 ```
 
+#include "main.h"
+#include <stdbool.h>
+
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+void push_button();
+bool button_status;
+
+int main(void)
+{
+
+  HAL_Init();
+
+  SystemClock_Config();
+
+  MX_GPIO_Init();
+
+  void push_button()
+  {
+  	button_status = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+  	if (button_status == 0)
+  	{
+  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
+  		HAL_Delay(500);
+  	}
+  	else
+  	{
+  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
+  		HAL_Delay(500);
+  	}
+  }
+  
+  while (1)
+  {
+	  push_button();
+  }
+}
+```
 
 
 ## Output screen shots of proteus  :
- 
- 
- 
+## LED OFF:
+![LED OFF](https://user-images.githubusercontent.com/118704873/235598673-0c066b58-7df4-4b7b-af65-7eb09e12793e.png)
+
+
+## LED ON:
+![LED ON](https://user-images.githubusercontent.com/118704873/235598694-5885fda8-67d2-4376-95d4-08c93b1c43b2.png)
+
+ ## Proteus layout(Add pdf screen shot of circuit here):
+![CIRCUIT DIAGRAM](https://user-images.githubusercontent.com/118704873/235598887-2096dbca-f25a-4ade-92b3-7243846cd635.png)
  
 ## Result :
 Interfacing a digital output and digital input  with ARM microcontroller are simulated in proteus and the results are verified.
